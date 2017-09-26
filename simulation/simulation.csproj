@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="controller\ISimController.cs" />
     <Compile Include="controller\SimController.cs" />
+    <Compile Include="model\IField.cs" />
     <Compile Include="model\ISimModel.cs" />
     <Compile Include="model\Vector.cs" />
     <Compile Include="model\SimModel.cs" />

@@ -8,7 +8,7 @@ using simulation.model;
 
 namespace simulation
 {
-    public class Field<T> : IList<T>
+    public class Field<T> : IField<T>
     {
         private IList<T> field;
         public int rows { get; }
