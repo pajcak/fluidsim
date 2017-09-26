@@ -8,5 +8,6 @@ namespace simulation.view
 {
     interface ISimView
     {
+        MainWindow mainWindow { get; }
     }
 }

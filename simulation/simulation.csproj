@@ -53,6 +53,8 @@
     <Compile Include="model\Vector.cs" />
     <Compile Include="model\SimModel.cs" />
     <Compile Include="model\Field.cs" />
+    <Compile Include="view\Grid_old.cs" />
+    <Compile Include="view\Grid.cs" />
     <Compile Include="view\ISimView.cs" />
     <Compile Include="view\MainWindow.cs">
       <SubType>Form</SubType>

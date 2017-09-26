@@ -24,7 +24,10 @@ namespace simulation.model
             //this.densityFieldPrev = new Field<float>(200, 300);
 
             // TODO set dt, diff and visc!!!!
-            throw new NotImplementedException();
+            dt = 0.5f;
+            diff = 0.5f;
+            visc = 0.5f;
+            //throw new NotImplementedException();
         }
 
         public void updateVelocities()
