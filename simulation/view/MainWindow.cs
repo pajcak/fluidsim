@@ -19,6 +19,9 @@ namespace simulation.view
         private int visibleY;
         private int gridPadding;
         private Pen gridPen;
+        private Pen vectorPen;
+
+        private IField<Vector> list;
 
         public MainWindow(SimView v)
         {
@@ -31,16 +34,25 @@ namespace simulation.view
             //and num of rows and cols passed to drawField
             float cellSize = 15f;
             gridPen = new Pen(Color.Black, 1f);
+            vectorPen = new Pen(Color.Blue, 1.5f);
             this.velocityGrid = new Grid(
                 new Point(gridPadding, gridPadding),
                 20, 30,
                 cellSize,
-                gridPen
+                gridPen,
+                vectorPen
                 );
             /*grid musi bejt furt videt celej, nezavisle na poctu rows a cols,
              ale zavisle na cellSize... takze cellSize se musi spocitat z 
              aktualni velikosti okna (pri OnPaint) a posledniho znamyho 
              (v budoucnu spis na zacatku fixne nastavenyho) poctu rows, cols*/
+            this.list = new Field<Vector>(20,30);
+            Random r = new Random();
+            for (int i = 0; i < 20 * 30; i++)
+            {
+                list[i].first = (float)r.NextDouble() *20.0f;
+                list[i].second = (float)r.NextDouble() * 20.0f;
+            }
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -56,6 +68,7 @@ namespace simulation.view
             float newCellSize = newCellSize1 < newCellSize2 ? newCellSize1 : newCellSize2;
             velocityGrid.cellSize = newCellSize;
             velocityGrid.drawGrid(e.Graphics);
+            velocityGrid.drawVectors(e.Graphics, ref list);
         }
     }
 }

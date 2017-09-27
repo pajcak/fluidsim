@@ -33,6 +33,17 @@ namespace simulation.model
             a.second += b.second;
             return a;
         }
+        public void normalize()
+        {
+            float magnitude = (float)Math.Sqrt(first * first + second * second);
+            first = first / magnitude;
+            second = second / magnitude;
+        }
+        public static Vector normalized(Vector v)
+        {
+            float magnitude = (float)Math.Sqrt(v.first * v.first + v.second * v.second);
+            return new Vector(v.first / magnitude, v.second / magnitude);
+        }
 
         public override string ToString()
         {

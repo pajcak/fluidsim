@@ -154,6 +154,21 @@ namespace simulation
             setBoundaries(bounds);
         }
  
+        public override String ToString()
+        {
+            String s = "";
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j ++)
+                {
+                    s += "[";
+                    s += this[i, j].ToString();
+                    if (j < cols - 1) s += ",";
+                    else s += "]\n";
+                }
+            }
+            return s;
+        }
         public void setBoundaries(int bounds)
         {
             //TODO - implement to have field boundaries
