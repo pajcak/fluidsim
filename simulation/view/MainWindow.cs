@@ -50,9 +50,13 @@ namespace simulation.view
             Random r = new Random();
             for (int i = 0; i < 20 * 30; i++)
             {
-                list[i].first = (float)r.NextDouble() *20.0f;
-                list[i].second = (float)r.NextDouble() * 20.0f;
+                //list[i].first = 0.5f;
+                //    list[i].second = 0.0f;
+                list[i].first = (float)r.NextDouble() * 200.0f;
+                list[i].second = (float)r.NextDouble() * 200.0f;
             }
+            list[1].first = 100.0f;
+            list[1].second= 100.0f;
         }
 
         private void MainWindow_Load(object sender, EventArgs e)

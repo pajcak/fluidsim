@@ -21,6 +21,7 @@ namespace simulation.view
         public int cols { get; }
         private Pen penBorder;
         private Pen penVector;
+        private Pen penArrow;
 
         public Grid(PointF _upperLeft, int _rows, int _cols, float _cellSize,
                     Pen _penBorder, Pen _penVector)
@@ -31,6 +32,7 @@ namespace simulation.view
             this.cols = _cols;
             this.penBorder = _penBorder;
             this.penVector = _penVector;
+            this.penArrow = new Pen(Color.Red, penVector.Width * 2f);
         }
 
         public void drawGrid(Graphics g)
@@ -56,7 +58,6 @@ namespace simulation.view
 
         public void drawVectors(Graphics g, ref IField<Vector> list)
         {
-            Console.WriteLine(list);
             if (list.rows != this.rows || list.cols != this.cols 
                 || list.Count != this.rows * this.cols)
                 throw new IndexOutOfRangeException();
@@ -72,12 +73,19 @@ namespace simulation.view
                         g.FillEllipse(penVector.Brush, shiftX, shiftY, penVector.Width, penVector.Width);
                         continue;
                     }
-                    Vector v = Vector.normalized(list[i, j]);
-                    v.first *= cellSize / 2; //resize to fit the cell
-                    v.second *= cellSize / 2;//resize to fit the cell
-                    PointF p1 = new PointF(shiftX + v.first, shiftY + v.second);
-                    PointF p2 = new PointF(shiftX - v.first, shiftY - v.second);
+                    //Console.WriteLine("CellSize={0}", cellSize);
+                    //Console.WriteLine("{0}", list[i,j]);
+                    //Vector v = Vector.normalized(list[i, j]);
+                    //v.first *= cellSize / 4; //resize to fit the cell
+                    //v.second *= cellSize / 4;//resize to fit the cell
+                    //NORMALIZATION DID NOT WORK AS EXPXECTED (i should have payed more attention in school :()
+                    Vector v = new Vector(list[i,j].first/cellSize, list[i,j].second/cellSize);
+
+                    //Console.WriteLine("{0}", v);
+                    PointF p1 = new PointF(shiftX + v.first, shiftY - v.second);
+                    PointF p2 = new PointF(shiftX - v.first, shiftY + v.second);
                     g.DrawLine(penVector, p1, p2);
+                    g.FillEllipse(penArrow.Brush, p1.X - penArrow.Width/2, p1.Y- penArrow.Width/2, penArrow.Width, penArrow.Width);
                 }
             }
         }
