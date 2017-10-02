@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace simulation.controller
 {
-    interface ISimController
+    public interface ISimController
     {
+        void simulate();
     }
 }

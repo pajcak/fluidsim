@@ -19,7 +19,7 @@ namespace simulation.model
         public SimModel()
         {
             this.velocityField = new Field<Vector>(20, 30);
-            //this.velocityFieldPrev = new Field<Vector>(20,30);
+            this.velocityFieldPrev = new Field<Vector>(20, 30);
             //this.densityField = new Field<float>(200, 300);
             //this.densityFieldPrev = new Field<float>(200, 300);
 

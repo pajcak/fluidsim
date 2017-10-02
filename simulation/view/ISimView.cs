@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using simulation.model;
+using simulation.controller;
 
 namespace simulation.view
 {

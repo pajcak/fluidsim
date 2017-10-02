@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace simulation.model
 {
-    interface ISimModel
+    public interface ISimModel
     {
         void updateVelocities();
         void updateDensities();

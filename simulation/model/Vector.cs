@@ -27,6 +27,19 @@ namespace simulation.model
             a.second *= b.second;
             return a;
         }
+        public static Vector operator *(Vector a, float x)
+        {
+            a.first *= x;
+            a.second *= x;
+            return a;
+        }
+        public static Vector operator /(Vector a, float x)
+        {
+            a.first /= x;
+            a.second /= x;
+            return a;
+        }
+
         public static Vector operator +(Vector a, Vector b)
         {
             a.first += b.first;

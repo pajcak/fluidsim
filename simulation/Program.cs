@@ -20,9 +20,12 @@ namespace simulation
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //ISimModel model = new SimModel();
-            ISimView view = new SimView();
-            //ISimController controller = new SimController(model, view);
+            ISimModel model = new SimModel();
+            SimController controller = new SimController(model);
+            SimView view = new SimView(controller);
+            controller.view = view;
+            //SimController controller = new SimController(model, view);
+            //view.controller = controller;
 
             //start a new thread with controller.simulate()
             //throw new NotImplementedException();

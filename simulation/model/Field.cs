@@ -115,12 +115,12 @@ namespace simulation
             dynamic a = dt * diff * Count;
             for (int k = 0; k < 20 /*TODO constant*/; k++)
             {
-                for (int i = 0; i < rows; i++)
+                for (int i = 1; i <= rows; i++)
                 {
-                    for (int j = 0; i < cols; j++)
+                    for (int j = 1; j <= cols; j++)
                     {
                         this[i, j] = (prevField[i, j] +
-                            a * ((dynamic)this[i - 1, j] + this[i + 1, j] + this[i, j - 1] + this[i, j + 1]))
+                             ((dynamic)this[i - 1, j] + this[i + 1, j] + this[i, j - 1] + this[i, j + 1]) * a)
                             / (1 + 4 * a);
                     }
                 }
@@ -147,19 +147,19 @@ namespace simulation
                     if (y > (Count / 2) + 0.5f) y = (Count / 2) + 0.5f;
                     j0 = (int)y; j1 = j0 + 1;
                     s1 = x - i0; s0 = 1 - s1; t1 = y - j0; t0 = 1 - t1;
-                    this[i, j] = s0 * (t0 * (dynamic)prevField[i0, j0] + t1 * (dynamic)prevField[i0, j1]) +
-                                    s1 * (t0 * (dynamic)prevField[i1, j0] + t1 * (dynamic)prevField[i1, j1]);
+                    this[i, j] = ((dynamic)prevField[i0, j0] * t0 + (dynamic)prevField[i0, j1] * t1) * s0 +
+                                    ((dynamic)prevField[i1, j0] * t0 + (dynamic)prevField[i1, j1] * t1) * s1;
                 }
             }
             setBoundaries(bounds);
         }
- 
+
         public override String ToString()
         {
             String s = "";
             for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols; j ++)
+                for (int j = 0; j < cols; j++)
                 {
                     s += "[";
                     s += this[i, j].ToString();

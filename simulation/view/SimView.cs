@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using simulation.model;
 using System.Windows.Forms;
+using simulation.controller;
 
 namespace simulation.view
 {
     public class SimView : ISimView
     {
         public MainWindow mainWindow { get; }
-        public SimView()
+        public SimController controller { get;  set; }
+        public SimView(SimController control)
         {
+            this.controller = control;
             this.mainWindow = new MainWindow(this);
         }
 
@@ -25,5 +28,6 @@ namespace simulation.view
         {
             mainWindow.velocityGrid.drawVectors(mainWindow.GetGraphics(), ref field);
         }
+
     }
 }

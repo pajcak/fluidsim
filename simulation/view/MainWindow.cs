@@ -36,22 +36,26 @@ namespace simulation.view
             float cellSize = 15f;
             gridPen = new Pen(Color.Black, 1f);
             vectorPen = new Pen(Color.Blue, 1.5f);
+
+            int rows = this.view.controller.model.GetVelocityField().rows;
+            int cols = this.view.controller.model.GetVelocityField().cols;
             this.velocityGrid = new Grid(
                 new Point(gridPadding, gridPadding),
-                20, 30,
+                rows, cols,
                 cellSize,
                 gridPen,
                 vectorPen
                 );
-            this.list = new Field<Vector>(20,30);
-            Random r = new Random();
-            for (int i = 0; i < 20 * 30; i++)
-            {
-                //list[i].first = 1.0f;
-                //list[i].second = 0.0f;
-                list[i].first = (float)r.NextDouble() * 200.0f;
-                list[i].second = (float)r.NextDouble() * 200.0f;
-            }
+            //this.list = new Field<Vector>(20,30);
+            //Random r = new Random();
+            //for (int i = 0; i < 20 * 30; i++)
+            //{
+            //    //list[i].first = 1.0f;
+            //    //list[i].second = 0.0f;
+            //    list[i].first = (float)r.NextDouble() * 200.0f;
+            //    list[i].second = (float)r.NextDouble() * 200.0f;
+            //}
+            this.view.controller.simulate();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
