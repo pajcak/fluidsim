@@ -21,16 +21,13 @@ namespace simulation
             Application.SetCompatibleTextRenderingDefault(false);
 
             ISimModel model = new SimModel();
-            SimController controller = new SimController(model);
-            SimView view = new SimView(controller);
-            controller.view = view;
-            //SimController controller = new SimController(model, view);
-            //view.controller = controller;
+            ISimView view = new SimView();
+            ISimController controller = new SimController(model, view);
 
             //start a new thread with controller.simulate()
             //throw new NotImplementedException();
-
             Application.Run(view.mainWindow);
+            // NEED TO START NEW THREAD FOR SIMULATION
         }
     }
 }

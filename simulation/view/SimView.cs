@@ -12,10 +12,8 @@ namespace simulation.view
     public class SimView : ISimView
     {
         public MainWindow mainWindow { get; }
-        public SimController controller { get;  set; }
-        public SimView(SimController control)
+        public SimView()
         {
-            this.controller = control;
             this.mainWindow = new MainWindow(this);
         }
 

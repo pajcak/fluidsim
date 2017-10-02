@@ -14,15 +14,14 @@ namespace simulation.controller
         public ISimView view { get; set; }
         private bool simulating;
 
-        public SimController(ISimModel model/*, ISimView view*/)
+        public SimController(ISimModel model, ISimView view)
         {
             this.model = model;
-            /*this.view = view;*/
+            this.view = view;
             this.simulating = true;
         }
         public void simulate()
         {
-            Console.WriteLine("ASDSADASDDASDSASDDS");
             while (simulating)
             {
                 //manage input from view
