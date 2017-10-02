@@ -10,5 +10,6 @@ namespace simulation.model
     {
         void updateVelocities();
         void updateDensities();
+        IField<Vector> GetVelocityField();
     }
 }

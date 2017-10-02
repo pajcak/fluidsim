@@ -14,12 +14,13 @@ namespace simulation.view
     public partial class MainWindow : Form
     {
         private SimView view;
-        private Grid velocityGrid;
+        public Grid velocityGrid { get; }
         private int visibleX;
         private int visibleY;
         private int gridPadding;
         private Pen gridPen;
         private Pen vectorPen;
+        private Graphics graphics;
 
         private IField<Vector> list;
 
@@ -29,7 +30,7 @@ namespace simulation.view
             this.view = v;
             this.visibleX = this.ClientSize.Width - 1;
             this.visibleY = this.ClientSize.Height - 1;
-            gridPadding = 20;
+            gridPadding = 5;
             //cellsize should be derived from windows size 
             //and num of rows and cols passed to drawField
             float cellSize = 15f;
@@ -42,21 +43,15 @@ namespace simulation.view
                 gridPen,
                 vectorPen
                 );
-            /*grid musi bejt furt videt celej, nezavisle na poctu rows a cols,
-             ale zavisle na cellSize... takze cellSize se musi spocitat z 
-             aktualni velikosti okna (pri OnPaint) a posledniho znamyho 
-             (v budoucnu spis na zacatku fixne nastavenyho) poctu rows, cols*/
             this.list = new Field<Vector>(20,30);
             Random r = new Random();
             for (int i = 0; i < 20 * 30; i++)
             {
-                //list[i].first = 0.5f;
-                //    list[i].second = 0.0f;
+                //list[i].first = 1.0f;
+                //list[i].second = 0.0f;
                 list[i].first = (float)r.NextDouble() * 200.0f;
                 list[i].second = (float)r.NextDouble() * 200.0f;
             }
-            list[1].first = 100.0f;
-            list[1].second= 100.0f;
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -66,13 +61,18 @@ namespace simulation.view
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            this.graphics = e.Graphics;
             // calculate new cellSize in order to fit the window
             float newCellSize1 = (this.ClientSize.Width - 2 * gridPadding - (velocityGrid.cols + 1) * gridPen.Width) / velocityGrid.cols;
             float newCellSize2 = (this.ClientSize.Height- 2 * gridPadding - (velocityGrid.rows + 1) * gridPen.Width) / velocityGrid.rows;
             float newCellSize = newCellSize1 < newCellSize2 ? newCellSize1 : newCellSize2;
             velocityGrid.cellSize = newCellSize;
-            velocityGrid.drawGrid(e.Graphics);
-            velocityGrid.drawVectors(e.Graphics, ref list);
+            velocityGrid.drawGrid(this.graphics);
+            velocityGrid.drawVectors(this.graphics, ref list);
+        }
+        public Graphics GetGraphics()
+        {
+            return this.graphics;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace simulation.view
 {
-    class Grid
+    public class Grid
     {
         public PointF origin { get; }
         /*
@@ -65,6 +65,7 @@ namespace simulation.view
             {
                 for (int j = 0; j < cols; j++)
                 {
+                    //OPTIMIZE: this can be precalculated only once at the beginning
                     float shiftX = origin.X + penBorder.Width / 2 + j * cellSize + j * penBorder.Width + cellSize / 2;
                     float shiftY = origin.Y + penBorder.Width / 2 + i * cellSize + i * penBorder.Width + cellSize / 2;
                     //ZERO VECTOR (cannot be normalized) -> draw point
@@ -73,15 +74,11 @@ namespace simulation.view
                         g.FillEllipse(penVector.Brush, shiftX, shiftY, penVector.Width, penVector.Width);
                         continue;
                     }
-                    //Console.WriteLine("CellSize={0}", cellSize);
-                    //Console.WriteLine("{0}", list[i,j]);
-                    //Vector v = Vector.normalized(list[i, j]);
-                    //v.first *= cellSize / 4; //resize to fit the cell
-                    //v.second *= cellSize / 4;//resize to fit the cell
-                    //NORMALIZATION DID NOT WORK AS EXPXECTED (i should have payed more attention in school :()
-                    Vector v = new Vector(list[i,j].first/cellSize, list[i,j].second/cellSize);
+                    Vector v = Vector.normalized(list[i, j]);
+                    //Console.WriteLine("{0}->{1}", list[i, j], v);
+                    v.first *= cellSize/2; //resize to fit the cell
+                    v.second *= cellSize/2;//resize to fit the cell
 
-                    //Console.WriteLine("{0}", v);
                     PointF p1 = new PointF(shiftX + v.first, shiftY - v.second);
                     PointF p2 = new PointF(shiftX - v.first, shiftY + v.second);
                     g.DrawLine(penVector, p1, p2);

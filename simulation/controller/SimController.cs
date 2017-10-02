@@ -27,6 +27,7 @@ namespace simulation.controller
                 //manage input from view
                 model.updateVelocities();
                 model.updateDensities();
+                view.drawField(model.GetVelocityField());
                 //view.drawField();
             }
         }

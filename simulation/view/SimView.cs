@@ -15,5 +15,15 @@ namespace simulation.view
         {
             this.mainWindow = new MainWindow(this);
         }
+
+        public void drawField(IField<float> field)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void drawField(IField<Vector> field)
+        {
+            mainWindow.velocityGrid.drawVectors(mainWindow.GetGraphics(), ref field);
+        }
     }
 }

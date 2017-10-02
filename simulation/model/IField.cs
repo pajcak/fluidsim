@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace simulation.model
 {
-    interface IField<T> : IList<T>
+    public interface IField<T> : IList<T>
     {
         int rows { get; }
         int cols { get; }

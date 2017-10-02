@@ -91,5 +91,9 @@ namespace simulation.model
             a = b;
             b = tmp;
         }
+        public IField<Vector> GetVelocityField()
+        {
+            return this.velocityField;
+        }
     }
 }

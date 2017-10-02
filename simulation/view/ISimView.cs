@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using simulation.model;
 
 namespace simulation.view
 {
-    interface ISimView
+    public interface ISimView
     {
         MainWindow mainWindow { get; }
+        void drawField(IField<float> field);
+        void drawField(IField<Vector> field);
     }
+
 }
